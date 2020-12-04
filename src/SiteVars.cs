@@ -79,6 +79,11 @@ namespace Landis.Extension.Succession.NECN
         private static ISiteVar<double[]> monthlyNEE;
         private static ISiteVar<double[]> monthlyStreamN;
         private static ISiteVar<double[]> monthlyLAI;
+        // LAI for tree spp
+        // Chihiro 2020.1.22
+        //private static ISiteVar<double> laiTree;
+        private static ISiteVar<double[]> monthlyLAITree;
+
         private static ISiteVar<double[]> monthlyResp;
         private static ISiteVar<double[]> monthlySoilWaterContent;
         private static ISiteVar<double> totalNuptake;
@@ -148,6 +153,7 @@ namespace Landis.Extension.Succession.NECN
 
             // Other variables
             monthlyLAI = PlugIn.ModelCore.Landscape.NewSiteVar<double[]>();
+            monthlyLAITree = PlugIn.ModelCore.Landscape.NewSiteVar<double[]>();
             mineralN            = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
             resorbedN           = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
             waterMovement       = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
@@ -233,6 +239,7 @@ namespace Landis.Extension.Succession.NECN
                 monthlyStreamN[site]         = new double[12];
                 monthlyResp[site]           = new double[12];
                 monthlyLAI[site] = new double[12];
+                monthlyLAITree[site] = new double[12];
                 monthlySoilWaterContent[site]       = new double[12];
 
                 CohortResorbedNallocation[site] = new Dictionary<int, Dictionary<int, double>>();
@@ -905,6 +912,13 @@ namespace Landis.Extension.Succession.NECN
                 monthlyLAI = value;
             }
         }
+        //---------------------------------------------------------------------
+
+        /// <summary>
+        /// A summary of Monthly LAI for tree spp (m2/m2)
+        /// </summary>
+        // Chihiro 2020.01.22
+        public static ISiteVar<double[]> MonthlyLAI_Trees { get { return monthlyLAITree; } }
         //---------------------------------------------------------------------
 
         /// <summary>

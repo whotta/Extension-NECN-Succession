@@ -41,6 +41,7 @@ namespace Landis.Extension.Succession.NECN
         public static int SuccessionTimeStep;
         public static double ProbEstablishAdjust;
         public static double StormFlowOverride = 0.0;
+        //public static bool Grasses = false;
 
         public static int FutureClimateBaseYear;
         public static int B_MAX;

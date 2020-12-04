@@ -235,6 +235,16 @@ namespace Landis.Extension.Succession.NECN
             ReadVar(drsom3);
             parameters.SetDecayRateSOM3(drsom3.Value);
 
+            // Multiplier to adjust judgement whether a tree-cohort is larger than grass layer
+            // W.Hotta 2020.07.07
+            InputVar<double> grassTMult = new InputVar<double>("GrassThresholdMultiplier");
+            if (ReadOptionalVar(grassTMult))
+            {
+                parameters.SetGrassThresholdMultiplier(grassTMult.Value);
+                //PlugIn.Grasses = true;
+            }
+
+
             InputVar<double> stormFlowOverride = new InputVar<double>("StormFlowOverride");
             if (ReadOptionalVar(stormFlowOverride))
             {
@@ -436,6 +446,7 @@ namespace Landis.Extension.Succession.NECN
                     parameters.SetFoliageLitterCN(species, System.Convert.ToDouble(row["FoliageLitterCN"]));
                     parameters.SetMaxANPP(species, System.Convert.ToInt32(row["MaximumANPP"]));
                     parameters.SetMaxBiomass(species, System.Convert.ToInt32(row["MaximumBiomass"]));
+                    parameters.Grass[species] = ReadGrass(row); 
                 }
             }
             else
@@ -817,6 +828,18 @@ namespace Landis.Extension.Succession.NECN
             else
                 speciesLineNums[species.Name] = LineNumber;
             return species;
+        }
+        private bool ReadGrass(DataRow row)
+        {
+            try
+            {
+                bool grass = System.Convert.ToBoolean(row["Grass"]);
+                return grass;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

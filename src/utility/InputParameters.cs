@@ -54,6 +54,7 @@ namespace Landis.Extension.Succession.NECN
         private double decayRateSOM1;
         private double decayRateSOM2;
         private double decayRateSOM3;
+        private double grassThresholdMultiplier; // W.Hotta 2020.07.07
         private double[] maximumShadeLAI;
         private double initMineralN;
         private double initFineFuels;
@@ -66,6 +67,7 @@ namespace Landis.Extension.Succession.NECN
         
         private Landis.Library.Parameters.Species.AuxParm<int> sppFunctionalType;
         private Landis.Library.Parameters.Species.AuxParm<bool> nFixer;
+        private Landis.Library.Parameters.Species.AuxParm<bool> grass;
         private Landis.Library.Parameters.Species.AuxParm<int> gddMin;
         private Landis.Library.Parameters.Species.AuxParm<int> gddMax;
         private Landis.Library.Parameters.Species.AuxParm<int> minJanTemp;
@@ -322,6 +324,7 @@ namespace Landis.Extension.Succession.NECN
 
         public Landis.Library.Parameters.Species.AuxParm<int>     SppFunctionalType {get {return sppFunctionalType;}}
         public Landis.Library.Parameters.Species.AuxParm<bool>     NFixer { get {return nFixer;}}
+        public Landis.Library.Parameters.Species.AuxParm<bool> Grass { get { return grass; } }
         public Landis.Library.Parameters.Species.AuxParm<int>     GDDmin     { get { return gddMin; }}
         public Landis.Library.Parameters.Species.AuxParm<int>     GDDmax     { get { return gddMax; }}
         public Landis.Library.Parameters.Species.AuxParm<int>     MinJanTemp { get { return minJanTemp; }}
@@ -480,6 +483,15 @@ namespace Landis.Extension.Succession.NECN
             {
                 return decayRateSOM3;
             }
+        }
+        //-----------------------------------------------
+        public double GrassThresholdMultiplier
+        {
+            get
+            {
+                return grassThresholdMultiplier;
+            }
+
         }
         //-----------------------------------------------
         public double DenitrificationRate
@@ -1080,6 +1092,13 @@ namespace Landis.Extension.Succession.NECN
         {
             decayRateSOM3 = VerifyRange(newValue, 0.0, 1.0);
         }
+        // --------------------------------------------------------------------
+        // Multiplier to adjust judgement whether a tree-cohort is larger than grass layer
+        // W.Hotta 2020.07.07
+        public void SetGrassThresholdMultiplier(InputValue<double> newValue)
+        {
+            grassThresholdMultiplier = VerifyRange(newValue, 0.0, 10.0);
+        }
         //---------------------------------------------------------------------
         public void SetDenitrif(InputValue<double> newValue)
         {
@@ -1108,6 +1127,7 @@ namespace Landis.Extension.Succession.NECN
 
             sppFunctionalType       = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);
             nFixer                  = new Landis.Library.Parameters.Species.AuxParm<bool>(speciesDataset);
+            grass                   = new Landis.Library.Parameters.Species.AuxParm<bool>(speciesDataset);
             gddMin                  = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);
             gddMax                  = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);
             minJanTemp              = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);

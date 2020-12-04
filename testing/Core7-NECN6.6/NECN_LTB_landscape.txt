@@ -71,7 +71,7 @@ LightEstablishmentTable
 	5	0.1	0.5	1.0	1.0	1.0	1.0
 
 SpeciesParameters
-Species_CSV_File NECN_Spp_Table.csv
+Species_CSV_File NECN_Spp_Table_with_Grass.csv
 
 FunctionalGroupParameters 
 Functional_CSV_File NECN_Functional_Table.csv
