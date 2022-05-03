@@ -90,12 +90,12 @@ namespace Landis.Extension.Succession.NECN
             SuccessionTimeStep = Timestep;
             sufficientLight = Parameters.LightClassProbabilities;
             // ProbEstablishAdjust = Parameters.ProbEstablishAdjustment;  W.Hotta (2022.05.03) commentout
-            ReadMaps.ReadProbEstAdjustMap(Parameters.InitialProbEstablishAdjustmentMapName); // W.Hotta (2022.05.03)
             MetadataHandler.InitializeMetadata(Timestep, modelCore, SoilCarbonMapNames, SoilNitrogenMapNames, ANPPMapNames, ANEEMapNames, TotalCMapNames); 
 
             FunctionalType.Initialize(Parameters);
             SpeciesData.Initialize(Parameters);
             SiteVars.Initialize(); // chihiro; this method use functional type data for initializing decay value
+            ReadMaps.ReadProbEstAdjustMap(Parameters.InitialProbEstablishAdjustmentMapName); // W.Hotta (2022.05.03)
             ReadMaps.ReadSoilDepthMap(Parameters.SoilDepthMapName);
             ReadMaps.ReadSoilDrainMap(Parameters.SoilDrainMapName);
             ReadMaps.ReadSoilBaseFlowMap(Parameters.SoilBaseFlowMapName);
