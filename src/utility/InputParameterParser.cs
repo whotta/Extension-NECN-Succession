@@ -166,6 +166,12 @@ namespace Landis.Extension.Succession.NECN
             ReadVar(deadSoilMapName);
             parameters.InitialDeadSoilMapName = deadSoilMapName.Value;
 
+            // W.Hotta (2022.05.03) ------
+            InputVar<string> probEstablishAdjustmentMapName = new InputVar<string>("InitialProbEstablishAdjustmentMapName");
+            ReadVar(probEstablishAdjustmentMapName);
+            parameters.InitialProbEstablishAdjustmentMapName = probEstablishAdjustmentMapName.Value;
+            // ------
+
             InputVar<bool> calimode = new InputVar<bool>("CalibrateMode");
             if (ReadOptionalVar(calimode))
                 parameters.CalibrateMode = calimode.Value;
@@ -190,9 +196,11 @@ namespace Landis.Extension.Succession.NECN
             ReadVar(wt);
             parameters.WType = WParse(wt.Value);
 
-            InputVar<double> pea = new InputVar<double>("ProbabilityEstablishAdjust");
-            ReadVar(pea);
-            parameters.ProbEstablishAdjustment = pea.Value;
+            // W.Hotta (2022.05.03) commentout ----
+            // InputVar<double> pea = new InputVar<double>("ProbabilityEstablishAdjust");
+            // ReadVar(pea);
+            // parameters.ProbEstablishAdjustment = pea.Value;
+            // ----
 
             InputVar<double> iMN = new InputVar<double>("InitialMineralN");
             ReadVar(iMN);

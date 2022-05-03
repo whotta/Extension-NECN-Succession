@@ -49,7 +49,12 @@ namespace Landis.Extension.Succession.NECN
             minMultiplier = System.Math.Min(minJanTempMultiplier, minMultiplier);
 
             establishProbability += minMultiplier;
-            establishProbability *= PlugIn.ProbEstablishAdjust;
+            // establishProbability *= PlugIn.ProbEstablishAdjust;
+
+            // W.Hotta (2022.05.03)
+            // establishmentProbability changes according to ProbEstAdjust by site
+            double probabilityEstablishmentAdjustment = SiteVars.ProbEstAdjust[site];
+            establishProbability *= probabilityEstablishmentAdjustment;
 
             avgSoilMoisturelimit[species.Index, climateRegion.Index] += soilMultiplier;
             avgMATlimit[species.Index, climateRegion.Index] += tempMultiplier;

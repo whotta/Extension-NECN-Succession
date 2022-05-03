@@ -40,12 +40,13 @@ namespace Landis.Extension.Succession.NECN
         private string initialSOM3NMapName;
         private string initialDeadSurfaceMapName;
         private string initialDeadSoilMapName;
+        private string initialProbEstablishAdjustmentMapName; // W.Hotta (2022.05.03)
 
         private bool calibrateMode;
         private bool smokeModelOutputs;
         private bool henne_watermode;
         private WaterType wtype;
-        private double probEstablishAdjust;
+        // private double probEstablishAdjust; W.Hotta (2022.05.03) commentout
         private double atmosNslope;
         private double atmosNintercept;
         private double latitude;
@@ -85,10 +86,11 @@ namespace Landis.Extension.Succession.NECN
         private Landis.Library.Parameters.Species.AuxParm<int> maxBiomass;
         private Landis.Library.Parameters.Species.AuxParm<bool> grass;  // optional
         private Landis.Library.Parameters.Species.AuxParm<double> growthLAI; // optional
-        private Landis.Library.Parameters.Species.AuxParm<bool> nlog_depend;
-        private double grassThresholdMultiplier; // W.Hotta 2020.07.07
 
         private List<ISufficientLight> sufficientLight;
+        private Landis.Library.Parameters.Species.AuxParm<bool> nlog_depend;
+        private double grassThresholdMultiplier; // W.Hotta 2020.07.07
+        public double GrassThresholdMultiplier { get { return grassThresholdMultiplier; } }
 
 
         //---------------------------------------------------------------------
@@ -241,19 +243,23 @@ namespace Landis.Extension.Succession.NECN
         /// <summary>
         /// Adjust probability of establishment due to variable time step.  A multiplier.
         /// </summary>
-        public double ProbEstablishAdjustment
-        {
-            get
-            {
-                return probEstablishAdjust;
-            }
-            set
-            {
-                if (value < 0.0 || value > 1.0)
-                    throw new InputValueException(value.ToString(), "Probability of adjustment factor must be > 0.0 and < 1");
-                probEstablishAdjust = value;
-            }
-        }
+
+        //  W.Hotta (2022.05.03) commentout ---
+        //public double ProbEstablishAdjustment
+        //{
+        //    get
+        //    {
+        //        return probEstablishAdjust;
+        //    }
+        //    set
+        //    {
+        //        if (value < 0.0 || value > 1.0)
+        //            throw new InputValueException(value.ToString(), "Probability of adjustment factor must be > 0.0 and < 1");
+        //        probEstablishAdjust = value;
+        //    }
+        //}
+        // ----
+
         //---------------------------------------------------------------------
         public double AtmosNslope
         {
@@ -334,8 +340,6 @@ namespace Landis.Extension.Succession.NECN
         public Landis.Library.Parameters.Species.AuxParm<double>  MaxDrought { get { return maxDrought; }}
         public Landis.Library.Parameters.Species.AuxParm<double>  LeafLongevity {get {return leafLongevity;}}
         public Landis.Library.Parameters.Species.AuxParm<double> GrowthLAI { get { return growthLAI; } }
-        public double GrassThresholdMultiplier { get { return grassThresholdMultiplier; } }
-
 
 
         //---------------------------------------------------------------------
@@ -807,6 +811,22 @@ namespace Landis.Extension.Succession.NECN
                 if (path.Trim(null).Length == 0)
                     throw new InputValueException(path, "\"{0}\" is not a valid path.", path);
                 initialDeadSoilMapName = value;
+            }
+        }
+        //---------------------------------------------------------------------
+        // W.Hotta (2022.05.03) 
+        public string InitialProbEstablishAdjustmentMapName
+        {
+            get
+            {
+                return initialProbEstablishAdjustmentMapName;
+            }
+            set
+            {
+                string path = value;
+                if (path.Trim(null).Length == 0)
+                    throw new InputValueException(path, "\"{0}\" is not a valid path.", path);
+                initialProbEstablishAdjustmentMapName = value;
             }
         }
         //---------------------------------------------------------------------

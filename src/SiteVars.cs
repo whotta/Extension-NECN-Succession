@@ -49,7 +49,9 @@ namespace Landis.Extension.Succession.NECN
         private static ISiteVar<double> soilPercentSand;
         private static ISiteVar<double> soilPercentClay;
 
-        
+        private static ISiteVar<double> probEstAdjust;  // W.Hotta (2022.05.03)
+
+
         // Similar to soil layers with respect to their pools:
         private static ISiteVar<Layer> stream;
         private static ISiteVar<Layer> sourceSink;
@@ -157,7 +159,8 @@ namespace Landis.Extension.Succession.NECN
             soilWiltingPoint = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
             soilPercentSand = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
             soilPercentClay = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
-            
+            probEstAdjust = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.03)
+
             // Other Layers
             stream              = PlugIn.ModelCore.Landscape.NewSiteVar<Layer>();
             sourceSink          = PlugIn.ModelCore.Landscape.NewSiteVar<Layer>();
@@ -515,6 +518,7 @@ namespace Landis.Extension.Succession.NECN
         public static ISiteVar<double> SoilWiltingPoint { get { return soilWiltingPoint; } }
         public static ISiteVar<double> SoilPercentSand { get { return soilPercentSand; } }
         public static ISiteVar<double> SoilPercentClay { get { return soilPercentClay; } }
+        public static ISiteVar<double> ProbEstAdjust { get { return probEstAdjust; } } // W.Hotta (2022.05.03)
         //---------------------------------------------------------------------
 
         /// <summary>

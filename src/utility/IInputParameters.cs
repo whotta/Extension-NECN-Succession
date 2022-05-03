@@ -35,10 +35,10 @@ namespace Landis.Extension.Succession.NECN
         string InitialSOM3NMapName { get; set; }
         string InitialDeadSurfaceMapName { get; set; }
         string InitialDeadSoilMapName { get; set; }
-
+        string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
         bool CalibrateMode { get; set; }
         WaterType WType {get;set;}
-        double ProbEstablishAdjustment { get; set; }
+        // double ProbEstablishAdjustment { get; set; } W.Hotta (2022.05.03) commentout
         double[] MaximumShadeLAI { get; }
         bool SmokeModelOutputs { get; set; }
         bool SoilWater_Henne { get; set; }
