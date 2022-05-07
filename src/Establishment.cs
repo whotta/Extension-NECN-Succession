@@ -53,8 +53,22 @@ namespace Landis.Extension.Succession.NECN
 
             // W.Hotta (2022.05.03)
             // establishmentProbability changes according to ProbEstAdjust by site
-            double probabilityEstablishmentAdjustment = SiteVars.ProbEstAdjust[site];
+            // ProEstAdjust must be entered explicitly in the space in the Input file.
+            // double probabilityEstablishmentAdjustment = SiteVars.ProbEstAdjust[site];
+            // establishProbability *= probabilityEstablishmentAdjustment;
+
+            // --------------------
+            // W.Hotta (2022.05.07) 
+            // Modification for simulating forest recovery after landslides
+            // Tree establishment is strongly influenced by slope angle on landslides.
+            // "Vegetation cover and species diversity showed both a decreasing trend with an increasing slope angle."
+            // (Bochet et al. 2009 Earth Surface Processes and Landforms)
+            // If slope angle is too high, any trees cannot establish.
+            // Therefore we determine ProbEstablishAdjustment of each site by using a linear regression
+            // based on BaseProbEstablishAdjustment and EstablishmentThresholdSlopeAngle. 
+            double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 + SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
             establishProbability *= probabilityEstablishmentAdjustment;
+            // --------------------
 
             avgSoilMoisturelimit[species.Index, climateRegion.Index] += soilMultiplier;
             avgMATlimit[species.Index, climateRegion.Index] += tempMultiplier;
