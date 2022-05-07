@@ -48,6 +48,7 @@ namespace Landis.Extension.Succession.NECN
         private WaterType wtype;
         // private double probEstablishAdjust; W.Hotta (2022.05.03) commentout
         private double baseprobEstablishAdjust; // W.Hotta (2022.05.07)
+        private double establishThresholdAngle; // W.Hotta (2022.05.07)
         private double atmosNslope;
         private double atmosNintercept;
         private double latitude;
@@ -273,6 +274,22 @@ namespace Landis.Extension.Succession.NECN
                 if (value < 0.0 || value > 1.0)
                     throw new InputValueException(value.ToString(), "Probability of adjustment factor must be > 0.0 and < 1");
                 baseprobEstablishAdjust = value;
+            }
+        }
+        // ----
+
+        //  W.Hotta (2022.05.07) ---
+        public double EstablishThresholdSlopeAngle
+        {
+            get
+            {
+                return establishThresholdAngle;
+            }
+            set
+            {
+                if (value < 0.0 || value > 90.0)
+                    throw new InputValueException(value.ToString(), "Establish Threshold Slope Angle factor must be > 0.0 and < 90");
+                establishThresholdAngle = value;
             }
         }
         // ----

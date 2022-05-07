@@ -208,6 +208,12 @@ namespace Landis.Extension.Succession.NECN
             parameters.BaseProbEstablishAdjustment = base_pea.Value;
             // ----
 
+            // W.Hotta (2022.05.07) ----
+            InputVar<double> eta = new InputVar<double>("EstablishThresholdAngle");
+            ReadVar(eta);
+            parameters.EstablishThresholdSlopeAngle = eta.Value;
+            // ----
+
             InputVar<double> iMN = new InputVar<double>("InitialMineralN");
             ReadVar(iMN);
             parameters.SetInitMineralN(iMN.Value);
