@@ -13,6 +13,7 @@ namespace Landis.Extension.Succession.NECN
         public static LitterType[] LitterParameters;
         public static bool CalibrateMode;
         // public static double ProbEstablishAdjust; W.Hotta (2022.05.03) commentout
+        public static double BaseProbEstablishAdjust; // W.Hotta (2022.05.07)
         public static WaterType WaterDecayFunction;
         public static bool SoilWaterVersion_Henne = false;
 

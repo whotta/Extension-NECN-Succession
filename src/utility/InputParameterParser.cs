@@ -202,6 +202,12 @@ namespace Landis.Extension.Succession.NECN
             // parameters.ProbEstablishAdjustment = pea.Value;
             // ----
 
+            // W.Hotta (2022.05.07) ----
+            InputVar<double> base_pea = new InputVar<double>("BaseProbabilityEstablishAdjust");
+            ReadVar(base_pea);
+            parameters.BaseProbEstablishAdjustment = base_pea.Value;
+            // ----
+
             InputVar<double> iMN = new InputVar<double>("InitialMineralN");
             ReadVar(iMN);
             parameters.SetInitMineralN(iMN.Value);

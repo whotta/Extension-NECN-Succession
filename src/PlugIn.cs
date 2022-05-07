@@ -40,6 +40,7 @@ namespace Landis.Extension.Succession.NECN
         public static int InputCommunityMapFrequency;
         public static int SuccessionTimeStep;
         // public static double ProbEstablishAdjust;  W.Hotta (2022.05.03) commentout
+        public static double BaseProbEstablishAdjust;  // W.Hotta (2022.05.07)
         public static double StormFlowOverride = 0.0;
 
         public static int FutureClimateBaseYear;
@@ -90,6 +91,7 @@ namespace Landis.Extension.Succession.NECN
             SuccessionTimeStep = Timestep;
             sufficientLight = Parameters.LightClassProbabilities;
             // ProbEstablishAdjust = Parameters.ProbEstablishAdjustment;  W.Hotta (2022.05.03) commentout
+            BaseProbEstablishAdjust = Parameters.BaseProbEstablishAdjustment;  // W.Hotta (2022.05.07)
             MetadataHandler.InitializeMetadata(Timestep, modelCore, SoilCarbonMapNames, SoilNitrogenMapNames, ANPPMapNames, ANEEMapNames, TotalCMapNames); 
 
             FunctionalType.Initialize(Parameters);

@@ -47,6 +47,7 @@ namespace Landis.Extension.Succession.NECN
         private bool henne_watermode;
         private WaterType wtype;
         // private double probEstablishAdjust; W.Hotta (2022.05.03) commentout
+        private double baseprobEstablishAdjust; // W.Hotta (2022.05.07)
         private double atmosNslope;
         private double atmosNintercept;
         private double latitude;
@@ -258,6 +259,22 @@ namespace Landis.Extension.Succession.NECN
         //        probEstablishAdjust = value;
         //    }
         //}
+        // ----
+
+        //  W.Hotta (2022.05.07) ---
+        public double BaseProbEstablishAdjustment
+        {
+            get
+            {
+                return baseprobEstablishAdjust;
+            }
+            set
+            {
+                if (value < 0.0 || value > 1.0)
+                    throw new InputValueException(value.ToString(), "Probability of adjustment factor must be > 0.0 and < 1");
+                baseprobEstablishAdjust = value;
+            }
+        }
         // ----
 
         //---------------------------------------------------------------------
