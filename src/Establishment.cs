@@ -66,8 +66,20 @@ namespace Landis.Extension.Succession.NECN
             // If slope angle is too high, any trees cannot establish.
             // Therefore we determine ProbEstablishAdjustment of each site by using a linear regression
             // based on BaseProbEstablishAdjustment and EstablishmentThresholdSlopeAngle. 
-            double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 + SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
-            establishProbability *= probabilityEstablishmentAdjustment;
+            // After vegetation recover to a certain level of AGB , a difference in ProbEstablishAdjust due to slope angle is eliminated.
+
+            double siteBiomass = Main.ComputeLivingBiomass(SiteVars.Cohorts[site]);
+            if (siteBiomass < PlugIn.EstablishThresholdAGB)
+            {
+                double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 + SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
+                establishProbability *= probabilityEstablishmentAdjustment;
+            }
+            else
+            {
+                double probabilityEstablishmentAdjustment = PlugIn.BaseProbEstablishAdjust;
+                establishProbability *= probabilityEstablishmentAdjustment;
+            }
+
             // --------------------
 
             avgSoilMoisturelimit[species.Index, climateRegion.Index] += soilMultiplier;
