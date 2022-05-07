@@ -49,7 +49,7 @@ namespace Landis.Extension.Succession.NECN
         private static ISiteVar<double> soilPercentSand;
         private static ISiteVar<double> soilPercentClay;
 
-        private static ISiteVar<double> probEstAdjust;  // W.Hotta (2022.05.03)
+        //private static ISiteVar<double> probEstAdjust;  // W.Hotta (2022.05.03)
         private static ISiteVar<double> slopeAngle;  // W.Hotta (2022.05.07)
 
 
@@ -161,7 +161,7 @@ namespace Landis.Extension.Succession.NECN
             soilPercentSand = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
             soilPercentClay = PlugIn.ModelCore.Landscape.NewSiteVar<double>();
 
-            probEstAdjust = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.03)
+            //probEstAdjust = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.03)
             slopeAngle = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.07)
 
             // Other Layers
@@ -521,7 +521,7 @@ namespace Landis.Extension.Succession.NECN
         public static ISiteVar<double> SoilWiltingPoint { get { return soilWiltingPoint; } }
         public static ISiteVar<double> SoilPercentSand { get { return soilPercentSand; } }
         public static ISiteVar<double> SoilPercentClay { get { return soilPercentClay; } }
-        public static ISiteVar<double> ProbEstAdjust { get { return probEstAdjust; } } // W.Hotta (2022.05.03)
+        //public static ISiteVar<double> ProbEstAdjust { get { return probEstAdjust; } } // W.Hotta (2022.05.03)
         public static ISiteVar<double> SlopeAngle { get { return slopeAngle; } } // W.Hotta (2022.05.07)
         //---------------------------------------------------------------------
 
