@@ -214,6 +214,12 @@ namespace Landis.Extension.Succession.NECN
             parameters.EstablishThresholdSlopeAngle = eta.Value;
             // ----
 
+            // W.Hotta (2022.05.07) ----
+            InputVar<double> etagb = new InputVar<double>("EstablishThresholdAGB");
+            ReadVar(etagb);
+            parameters.EstablishThresholdAGBiom = etagb.Value;
+            // ----
+
             InputVar<double> iMN = new InputVar<double>("InitialMineralN");
             ReadVar(iMN);
             parameters.SetInitMineralN(iMN.Value);

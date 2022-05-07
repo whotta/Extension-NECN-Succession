@@ -50,6 +50,7 @@ namespace Landis.Extension.Succession.NECN
         // private double probEstablishAdjust; W.Hotta (2022.05.03) commentout
         private double baseprobEstablishAdjust; // W.Hotta (2022.05.07)
         private double establishThresholdAngle; // W.Hotta (2022.05.07)
+        private double establishThresholdAGB; // W.Hotta (2022.05.07)
         private double atmosNslope;
         private double atmosNintercept;
         private double latitude;
@@ -291,6 +292,22 @@ namespace Landis.Extension.Succession.NECN
                 if (value < 0.0 || value > 90.0)
                     throw new InputValueException(value.ToString(), "Establish Threshold Slope Angle factor must be > 0.0 and < 90");
                 establishThresholdAngle = value;
+            }
+        }
+        // ----
+
+        //  W.Hotta (2022.05.07) ---
+        public double EstablishThresholdAGBiom
+        {
+            get
+            {
+                return establishThresholdAGB;
+            }
+            set
+            {
+                if (value < 0.0)
+                    throw new InputValueException(value.ToString(), "Establish Threshold AGB factor must be > 0.0");
+                establishThresholdAGB = value;
             }
         }
         // ----
