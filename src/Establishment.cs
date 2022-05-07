@@ -70,9 +70,10 @@ namespace Landis.Extension.Succession.NECN
             // a difference in ProbEstablishAdjust due to slope angle is eliminated if slope angle of each site is smaller than EstablishmentThresholdSlopeAngle.
 
             double siteBiomass = Main.ComputeLivingBiomass(SiteVars.Cohorts[site]);
+            PlugIn.ModelCore.UI.WriteLine("  Site biomass:  AGB={0}]", siteBiomass);
             if (siteBiomass < PlugIn.EstablishThresholdAGB && SiteVars.SlopeAngle[site] <= PlugIn.EstablishThresholdAngle)
             {
-                double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 + SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
+                double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 - SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
                 establishProbability *= probabilityEstablishmentAdjustment;
             }
             else if (siteBiomass >= PlugIn.EstablishThresholdAGB && SiteVars.SlopeAngle[site] <= PlugIn.EstablishThresholdAngle)
