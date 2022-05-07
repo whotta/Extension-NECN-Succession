@@ -167,9 +167,9 @@ namespace Landis.Extension.Succession.NECN
             parameters.InitialDeadSoilMapName = deadSoilMapName.Value;
 
             // W.Hotta (2022.05.03) ------
-            InputVar<string> probEstablishAdjustmentMapName = new InputVar<string>("InitialProbEstablishAdjustmentMapName");
-            ReadVar(probEstablishAdjustmentMapName);
-            parameters.InitialProbEstablishAdjustmentMapName = probEstablishAdjustmentMapName.Value;
+            InputVar<string> slopeAngleMapName = new InputVar<string>("SlopeAngleMapName");
+            ReadVar(slopeAngleMapName);
+            parameters.SlopeAngleMapName = slopeAngleMapName.Value;
             // ------
 
             InputVar<bool> calimode = new InputVar<bool>("CalibrateMode");

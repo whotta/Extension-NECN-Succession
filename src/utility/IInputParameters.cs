@@ -36,6 +36,7 @@ namespace Landis.Extension.Succession.NECN
         string InitialDeadSurfaceMapName { get; set; }
         string InitialDeadSoilMapName { get; set; }
         string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
+        string SlopeAngleMapName { get; set; } // W.Hotta (2022.05.03)
         bool CalibrateMode { get; set; }
         WaterType WType {get;set;}
         // double ProbEstablishAdjustment { get; set; } W.Hotta (2022.05.03) commentout

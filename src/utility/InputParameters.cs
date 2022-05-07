@@ -41,6 +41,7 @@ namespace Landis.Extension.Succession.NECN
         private string initialDeadSurfaceMapName;
         private string initialDeadSoilMapName;
         private string initialProbEstablishAdjustmentMapName; // W.Hotta (2022.05.03)
+        private string slopeAngleMapName; // W.Hotta (2022.05.07)
 
         private bool calibrateMode;
         private bool smokeModelOutputs;
@@ -864,7 +865,22 @@ namespace Landis.Extension.Succession.NECN
             }
         }
         //---------------------------------------------------------------------
-
+        // W.Hotta (2022.05.07) 
+        public string SlopeAngleMapName
+        {
+            get
+            {
+                return slopeAngleMapName;
+            }
+            set
+            {
+                string path = value;
+                if (path.Trim(null).Length == 0)
+                    throw new InputValueException(path, "\"{0}\" is not a valid path.", path);
+                slopeAngleMapName = value;
+            }
+        }
+        //---------------------------------------------------------------------
         public void SetMaximumShadeLAI(byte                   shadeClass,
                                           //IEcoregion             ecoregion,
                                           InputValue<double> newValue)

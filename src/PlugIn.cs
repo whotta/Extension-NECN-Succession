@@ -100,6 +100,7 @@ namespace Landis.Extension.Succession.NECN
             SpeciesData.Initialize(Parameters);
             SiteVars.Initialize(); // chihiro; this method use functional type data for initializing decay value
             ReadMaps.ReadProbEstAdjustMap(Parameters.InitialProbEstablishAdjustmentMapName); // W.Hotta (2022.05.03)
+            ReadMaps.ReadSlopeAngleMap(Parameters.SlopeAngleMapName); // W.Hotta (2022.05.07)
             ReadMaps.ReadSoilDepthMap(Parameters.SoilDepthMapName);
             ReadMaps.ReadSoilDrainMap(Parameters.SoilDrainMapName);
             ReadMaps.ReadSoilBaseFlowMap(Parameters.SoilBaseFlowMapName);
