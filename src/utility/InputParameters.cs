@@ -44,6 +44,7 @@ namespace Landis.Extension.Succession.NECN
         private string slopeAngleMapName; // W.Hotta (2022.05.07)
 
         private bool calibrateMode;
+        private bool reduceOutputs; // W.Hotta (2022.06.12, for calibration)
         private bool smokeModelOutputs;
         private bool henne_watermode;
         private WaterType wtype;
@@ -197,6 +198,23 @@ namespace Landis.Extension.Succession.NECN
             }
             set {
                 calibrateMode = value;
+            }
+        }
+
+        //---------------------------------------------------------------------
+        /// <summary>
+        /// Determines if reduce unused output maps and logs.
+        /// Chihiro 2020.02.12
+        /// </summary>
+        public bool ReduceOutputs
+        {
+            get
+            {
+                return reduceOutputs;
+            }
+            set
+            {
+                reduceOutputs = value;
             }
         }
 

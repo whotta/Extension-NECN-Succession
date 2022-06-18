@@ -12,6 +12,7 @@ namespace Landis.Extension.Succession.NECN
         // USER INPUTS ------------------------------------------------------------
         public static LitterType[] LitterParameters;
         public static bool CalibrateMode;
+        public static bool ReduceOutputs; // W.Hotta (2022.06.12, for calibration)
         // public static double ProbEstablishAdjust; W.Hotta (2022.05.03) commentout
         public static double BaseProbEstablishAdjust; // W.Hotta (2022.05.07)
         public static double EstablishThresholdAngle; // W.Hotta (2022.05.07)
@@ -204,6 +205,7 @@ namespace Landis.Extension.Succession.NECN
             LitterType litterParmsSoil = new LitterType();
 
             CalibrateMode = parameters.CalibrateMode;
+            ReduceOutputs = parameters.ReduceOutputs; // W.Hotta (2022.06.12, for calibration)
             SoilWaterVersion_Henne = parameters.SoilWater_Henne;
             WaterDecayFunction = parameters.WType;
             

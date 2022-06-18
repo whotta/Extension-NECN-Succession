@@ -205,7 +205,9 @@ namespace Landis.Extension.Succession.NECN
                 }
                 Outputs.WritePrimaryLogFile(PlugIn.ModelCore.CurrentTime);
                 Outputs.WriteShortPrimaryLogFile(PlugIn.ModelCore.CurrentTime);
-                Outputs.WriteMaps();
+                // Outputs.WriteMaps();
+                if (!OtherData.ReduceOutputs) // W.Hotta (2022.06.12, for calibration)
+                    Outputs.WriteMaps();
                 Outputs.WriteReproductionLog(PlugIn.ModelCore.CurrentTime);
                 Establishment.LogEstablishment();
                 if (PlugIn.InputCommunityMapNames != null && ModelCore.CurrentTime % PlugIn.InputCommunityMapFrequency == 0)
@@ -485,7 +487,7 @@ namespace Landis.Extension.Succession.NECN
             //   Option2: function type is power
             double nurseryLogAvailabilityModifier = 2.0; // tuning parameter (only even)
             double nurseryLogAvailability = 1 - Math.Pow(ComputeNurseryLogAreaRatio(species, site) - 1, nurseryLogAvailabilityModifier);
-            if (OtherData.CalibrateMode)
+            if (OtherData.CalibrateMode && !OtherData.ReduceOutputs) // W.Hotta (2022.06.12, for calibration)
             {
                 PlugIn.ModelCore.UI.WriteLine("original_lightProbability:{0},{1},{2}", PlugIn.ModelCore.CurrentTime, species.Name, lightProbability);
                 PlugIn.ModelCore.UI.WriteLine("siteShade:{0}", siteShade);
@@ -521,7 +523,7 @@ namespace Landis.Extension.Succession.NECN
                 }
             }
 
-            if (OtherData.CalibrateMode)
+            if (OtherData.CalibrateMode && !OtherData.ReduceOutputs) // W.Hotta (2022.06.12, for calibration)
             {
                 PlugIn.ModelCore.UI.WriteLine("nurseryLogPenalty:{0},{1},{2}", PlugIn.ModelCore.CurrentTime, species.Name, nurseryLogAvailability);
                 PlugIn.ModelCore.UI.WriteLine("modified_lightProbability:{0},{1},{2}", PlugIn.ModelCore.CurrentTime, species.Name, lightProbability);
@@ -633,7 +635,7 @@ namespace Landis.Extension.Succession.NECN
             double decayClass3AreaRatio = 4 * 2 * nurseryLogC[0] / (Math.PI * hight * densityDecayClass3) * Math.Pow(10, -4); // Decay class 3
             double decayClass4AreaRatio = 4 * 2 * nurseryLogC[1] / (Math.PI * hight * densityDecayClass4) * Math.Pow(10, -4); // Decay class 4
             double decayClass5AreaRatio = 4 * 2 * nurseryLogC[2] / (Math.PI * hight * densityDecayClass5) * Math.Pow(10, -4); // Decay class 5
-            if (OtherData.CalibrateMode && species.Index == 0)
+            if (OtherData.CalibrateMode && species.Index == 0 && !OtherData.ReduceOutputs) // W.Hotta (2022.06.12, for calibration)
             {
                 PlugIn.ModelCore.UI.WriteLine("nurseryLogC:{0},{1},{2},{3}", PlugIn.ModelCore.CurrentTime, nurseryLogC[0], nurseryLogC[1], nurseryLogC[2]);
                 PlugIn.ModelCore.UI.WriteLine("decayClassAreaRatios:{0},{1},{2},{3}", PlugIn.ModelCore.CurrentTime, decayClass3AreaRatio, decayClass4AreaRatio, decayClass5AreaRatio);

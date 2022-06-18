@@ -38,6 +38,7 @@ namespace Landis.Extension.Succession.NECN
         // string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
         string SlopeAngleMapName { get; set; } // W.Hotta (2022.05.03)
         bool CalibrateMode { get; set; }
+        bool ReduceOutputs { get; set; } // W.Hotta (2022.06.12, for calibration)
         WaterType WType {get;set;}
         // double ProbEstablishAdjustment { get; set; } W.Hotta (2022.05.03) commentout
         double BaseProbEstablishAdjustment { get; set; } // W.Hotta (2022.05.07)

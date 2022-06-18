@@ -178,6 +178,14 @@ namespace Landis.Extension.Succession.NECN
             else
                 parameters.CalibrateMode = false;
 
+            // W.Hotta (2022.06.12, for calibration) ==============================================
+            InputVar<bool> reduceOutputs = new InputVar<bool>("ReduceOutputs");
+            if (ReadOptionalVar(reduceOutputs))
+                parameters.ReduceOutputs = reduceOutputs.Value;
+            else
+                parameters.CalibrateMode = false;
+            // ==================================================================
+
             InputVar<bool> smokemode = new InputVar<bool>("SmokeModelOutputs");
             if (ReadOptionalVar(smokemode))
                 parameters.SmokeModelOutputs = smokemode.Value;

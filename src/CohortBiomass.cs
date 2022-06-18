@@ -619,7 +619,8 @@ namespace Landis.Extension.Succession.NECN
 
         private static double calculate_LAI_Competition(ICohort cohort, ActiveSite site)
         {
-            double k = -0.14;  
+            // double k = -0.14;
+            double k = -0.42;
             // This is the value given for all temperature ecosystems. 
             // The model is relatively insensitive to this parameter ZR 06/01/2021
 
