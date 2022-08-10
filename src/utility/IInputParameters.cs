@@ -44,6 +44,7 @@ namespace Landis.Extension.Succession.NECN
         double BaseProbEstablishAdjustment { get; set; } // W.Hotta (2022.05.07)
         double EstablishThresholdSlopeAngle { get; set; } // W.Hotta (2022.05.07)
         double EstablishThresholdAGBiom { get; set; } // W.Hotta (2022.05.07)
+        double AngleEstablishAdjustFunc { get; set; } // W.Hotta (2022.07.01)
         double[] MaximumShadeLAI { get; }
         bool SmokeModelOutputs { get; set; }
         bool SoilWater_Henne { get; set; }

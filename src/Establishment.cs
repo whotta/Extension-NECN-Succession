@@ -73,8 +73,21 @@ namespace Landis.Extension.Succession.NECN
             PlugIn.ModelCore.UI.WriteLine("  Site biomass:  AGB={0}]", siteBiomass);
             if (siteBiomass < PlugIn.EstablishThresholdAGB && SiteVars.SlopeAngle[site] <= PlugIn.EstablishThresholdAngle)
             {
-                double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 - SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
-                establishProbability *= probabilityEstablishmentAdjustment;
+                if (PlugIn.AngleEstablishAdjustFunction == 1) 
+                {
+                    double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 - SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
+                    establishProbability *= probabilityEstablishmentAdjustment;
+                }
+                else if (PlugIn.AngleEstablishAdjustFunction == 2)
+                {
+                    double probabilityEstablishmentAdjustment = Math.Max(Math.Pow((SiteVars.SlopeAngle[site] - PlugIn.EstablishThresholdAngle),2) / (Math.Pow(PlugIn.EstablishThresholdAngle, 2) / PlugIn.BaseProbEstablishAdjust), 0);
+                    establishProbability *= probabilityEstablishmentAdjustment;
+                }
+                else if (PlugIn.AngleEstablishAdjustFunction == 3)
+                {
+                    double probabilityEstablishmentAdjustment = Math.Max((PlugIn.BaseProbEstablishAdjust - (PlugIn.BaseProbEstablishAdjust / Math.Pow(PlugIn.EstablishThresholdAngle, 2)) * Math.Pow(SiteVars.SlopeAngle[site], 2)), 0);
+                    establishProbability *= probabilityEstablishmentAdjustment;
+                }
             }
             else if (siteBiomass >= PlugIn.EstablishThresholdAGB && SiteVars.SlopeAngle[site] <= PlugIn.EstablishThresholdAngle)
             {

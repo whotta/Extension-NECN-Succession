@@ -52,6 +52,7 @@ namespace Landis.Extension.Succession.NECN
         private double baseprobEstablishAdjust; // W.Hotta (2022.05.07)
         private double establishThresholdAngle; // W.Hotta (2022.05.07)
         private double establishThresholdAGB; // W.Hotta (2022.05.07)
+        private double angleEstablishAdjustFunction; // W.Hotta (2022.05.07)
         private double atmosNslope;
         private double atmosNintercept;
         private double latitude;
@@ -329,7 +330,22 @@ namespace Landis.Extension.Succession.NECN
             }
         }
         // ----
-
+        
+        //  W.Hotta (2022.07.01) ---
+        public double AngleEstablishAdjustFunc
+        {
+            get
+            {
+                return angleEstablishAdjustFunction;
+            }
+            set
+            {
+                if (value < 0.0 || value > 3.0)
+                    throw new InputValueException(value.ToString(), "AngleEstablishAdjustFunc must be > 0.0 and < 3.0");
+                angleEstablishAdjustFunction = value;
+            }
+        }
+        // ----
         //---------------------------------------------------------------------
         public double AtmosNslope
         {
