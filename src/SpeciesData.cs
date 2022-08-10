@@ -36,6 +36,7 @@ namespace Landis.Extension.Succession.NECN
         public static Landis.Library.Parameters.Species.AuxParm<double> FineRootCN;
         public static Landis.Library.Parameters.Species.AuxParm<int> Max_ANPP;
         public static Landis.Library.Parameters.Species.AuxParm<int> Max_Biomass;
+        public static Landis.Library.Parameters.Species.AuxParm<int> MoistureTolerance; // W.Hotta (2022.08.10)
 
         // Optional parameters:
         public static Landis.Library.Parameters.Species.AuxParm<bool> Grass;
@@ -68,6 +69,7 @@ namespace Landis.Extension.Succession.NECN
             Grass               = parameters.Grass;
             Nlog_depend         = parameters.Nlog_depend; // W.Hotta (2021.08.01)
             GrowthLAI           = parameters.GrowthLAI;
+            MoistureTolerance = parameters.MoistureTolerance; // W.Hotta (2022.08.10)
 
             foreach (ISpecies spp in PlugIn.ModelCore.Species)
             {

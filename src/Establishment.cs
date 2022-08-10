@@ -32,6 +32,7 @@ namespace Landis.Extension.Succession.NECN
             double tempMultiplier = 0.0;
             double soilMultiplier = 0.0;
             double minJanTempMultiplier = 0.0;
+            // double moisture_tolerance = SpeciesData.MoistureTolerance[species]; // W.Hotta (2022.08.10)
             double establishProbability = 0.0;
 
             AnnualClimate_Monthly ecoClimate = ClimateRegionData.AnnualWeather[climateRegion];

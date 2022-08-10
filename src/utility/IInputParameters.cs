@@ -111,6 +111,7 @@ namespace Landis.Extension.Succession.NECN
         Landis.Library.Parameters.Species.AuxParm<int> MaxANPP { get; }
         Landis.Library.Parameters.Species.AuxParm<int> MaxBiomass { get; }
         Landis.Library.Parameters.Species.AuxParm<double> GrowthLAI { get; }
+        Landis.Library.Parameters.Species.AuxParm<int> MoistureTolerance { get; } // W.Hotta (2022.08.10)
 
         double AtmosNslope {get;}
         double AtmosNintercept {get;}

@@ -92,6 +92,7 @@ namespace Landis.Extension.Succession.NECN
         private Landis.Library.Parameters.Species.AuxParm<int> maxBiomass;
         private Landis.Library.Parameters.Species.AuxParm<bool> grass;  // optional
         private Landis.Library.Parameters.Species.AuxParm<double> growthLAI; // optional
+        private Landis.Library.Parameters.Species.AuxParm<int> moistureTolerance; // W.Hotta (2022.08.10)
 
         private List<ISufficientLight> sufficientLight;
         private Landis.Library.Parameters.Species.AuxParm<bool> nlog_depend;
@@ -426,6 +427,7 @@ namespace Landis.Extension.Succession.NECN
         public Landis.Library.Parameters.Species.AuxParm<double>  MaxDrought { get { return maxDrought; }}
         public Landis.Library.Parameters.Species.AuxParm<double>  LeafLongevity {get {return leafLongevity;}}
         public Landis.Library.Parameters.Species.AuxParm<double> GrowthLAI { get { return growthLAI; } }
+        public Landis.Library.Parameters.Species.AuxParm<int> MoistureTolerance { get { return moistureTolerance; } } // W.Hotta (2022.08.10)
 
 
         //---------------------------------------------------------------------
@@ -1182,6 +1184,17 @@ namespace Landis.Extension.Succession.NECN
             growthLAI[species] = VerifyRange(newValue, 0.0, 1.0);
         }
 
+        // W.Hotta (2022.08.10)
+        public void SetMoistureTolerance(ISpecies species, InputValue<int> newValue)
+        {
+            Debug.Assert(species != null);
+            moistureTolerance[species] = VerifyRange(newValue, 1, 3);
+        }
+        public void SetMoistureTolerance(ISpecies species, int newValue)
+        {
+            Debug.Assert(species != null);
+            moistureTolerance[species] = VerifyRange(newValue, 1, 3);
+        }
 
         //---------------------------------------------------------------------
 
@@ -1275,6 +1288,7 @@ namespace Landis.Extension.Succession.NECN
             maxANPP                 = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);
             maxBiomass              = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset);
             growthLAI               = new Landis.Library.Parameters.Species.AuxParm<double>(speciesDataset);
+            moistureTolerance       = new Landis.Library.Parameters.Species.AuxParm<int>(speciesDataset); // W.Hotta (2022.08.10)
 
             maximumShadeLAI = new double[6];
             sufficientLight         = new List<ISufficientLight>();
