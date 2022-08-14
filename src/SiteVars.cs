@@ -51,6 +51,7 @@ namespace Landis.Extension.Succession.NECN
 
         //private static ISiteVar<double> probEstAdjust;  // W.Hotta (2022.05.03)
         private static ISiteVar<double> slopeAngle;  // W.Hotta (2022.05.07)
+        private static ISiteVar<double> soilMoisture;  // W.Hotta (2022.08.14)
 
 
         // Similar to soil layers with respect to their pools:
@@ -163,6 +164,7 @@ namespace Landis.Extension.Succession.NECN
 
             //probEstAdjust = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.03)
             slopeAngle = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.05.07)
+            soilMoisture = PlugIn.ModelCore.Landscape.NewSiteVar<double>();  // W.Hotta (2022.08.14)
 
             // Other Layers
             stream              = PlugIn.ModelCore.Landscape.NewSiteVar<Layer>();
@@ -523,6 +525,7 @@ namespace Landis.Extension.Succession.NECN
         public static ISiteVar<double> SoilPercentClay { get { return soilPercentClay; } }
         //public static ISiteVar<double> ProbEstAdjust { get { return probEstAdjust; } } // W.Hotta (2022.05.03)
         public static ISiteVar<double> SlopeAngle { get { return slopeAngle; } } // W.Hotta (2022.05.07)
+        public static ISiteVar<double> SoilMoisture { get { return soilMoisture; } } // W.Hotta (2022.08.14)
         //---------------------------------------------------------------------
 
         /// <summary>

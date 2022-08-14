@@ -26,6 +26,7 @@ namespace Landis.Extension.Succession.NECN
         public static double AnnualWaterBalance;
 
         private List<ISufficientLight> sufficientLight;
+        public static List<IWetness> wetness; // W.Hotta (2022.08.10)
         public static string SoilCarbonMapNames = null;
         public static int SoilCarbonMapFrequency;
         public static string SoilNitrogenMapNames = null;
@@ -93,6 +94,7 @@ namespace Landis.Extension.Succession.NECN
             Timestep = Parameters.Timestep;
             SuccessionTimeStep = Timestep;
             sufficientLight = Parameters.LightClassProbabilities;
+            wetness = Parameters.MoistureClassProbabilities; // W.Hotta (2022.08.10)
             // ProbEstablishAdjust = Parameters.ProbEstablishAdjustment;  W.Hotta (2022.05.03) commentout
             BaseProbEstablishAdjust = Parameters.BaseProbEstablishAdjustment;  // W.Hotta (2022.05.07)
             EstablishThresholdAngle = Parameters.EstablishThresholdSlopeAngle; // W.Hotta (2022.05.07)
@@ -105,6 +107,7 @@ namespace Landis.Extension.Succession.NECN
             SiteVars.Initialize(); // chihiro; this method use functional type data for initializing decay value
             // ReadMaps.ReadProbEstAdjustMap(Parameters.InitialProbEstablishAdjustmentMapName); // W.Hotta (2022.05.03)
             ReadMaps.ReadSlopeAngleMap(Parameters.SlopeAngleMapName); // W.Hotta (2022.05.07)
+            ReadMaps.ReadSoilMoistureMap(Parameters.SoilMoistureMapName); // W.Hotta (2022.05.07)
             ReadMaps.ReadSoilDepthMap(Parameters.SoilDepthMapName);
             ReadMaps.ReadSoilDrainMap(Parameters.SoilDrainMapName);
             ReadMaps.ReadSoilBaseFlowMap(Parameters.SoilBaseFlowMapName);

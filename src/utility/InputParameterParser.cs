@@ -172,6 +172,12 @@ namespace Landis.Extension.Succession.NECN
             parameters.SlopeAngleMapName = slopeAngleMapName.Value;
             // ------
 
+            // W.Hotta (2022.08.14) ------
+            InputVar<string> soilMoistureMapName = new InputVar<string>("SoilMoistureMapName");
+            ReadVar(soilMoistureMapName);
+            parameters.SoilMoistureMapName = soilMoistureMapName.Value;
+            // ------
+
             InputVar<bool> calimode = new InputVar<bool>("CalibrateMode");
             if (ReadOptionalVar(calimode))
                 parameters.CalibrateMode = calimode.Value;
@@ -407,7 +413,7 @@ namespace Landis.Extension.Succession.NECN
 
             int previousNumber = 0;
 
-            while (! AtEndOfInput && CurrentName != Names.SpeciesParameters
+            while (! AtEndOfInput && CurrentName != "WetnessEstablishmentTable"
                                   && previousNumber != 6) {
                 StringReader currentLine = new StringReader(CurrentLine);
 
@@ -452,6 +458,58 @@ namespace Landis.Extension.Succession.NECN
                 throw NewParseException("No sufficient light probabilities defined.");
             if (previousNumber != 5)
                 throw NewParseException("Expected shade class {0}", previousNumber + 1);
+
+            //-------------------------
+
+            // W.Hotta (2022.08.10) ----
+            //  Read table of Wetness probabilities.
+            //  Moisture classes are in increasing order.
+            PlugIn.ModelCore.UI.WriteLine("   Begin parsing WetnessEstablishmentTable.");
+            ReadName("WetnessEstablishmentTable");
+
+            InputVar<double> wn = new InputVar<double>("Moisture Class");
+            InputVar<double> pm1 = new InputVar<double>("Probability of Germination - Moisture Level 1");
+            InputVar<double> pm2 = new InputVar<double>("Probability of Germination - Moisture Level 2");
+            InputVar<double> pm3 = new InputVar<double>("Probability of Germination - Moisture Level 3");
+
+            int previousNumber2 = 0;
+
+            while (!AtEndOfInput && CurrentName != Names.SpeciesParameters
+                                  && previousNumber != 4)
+            {
+                StringReader currentLine = new StringReader(CurrentLine);
+
+                IWetness wet = new Wetness();
+
+                ReadValue(wn, currentLine);
+                wet.MoistureClass = wn.Value;
+
+                //  Check that the current moisture class is 1 more than
+                //  the previous number (numbers are must be in increasing order).
+                if (wn.Value.Actual != (byte)previousNumber2 + 1)
+                    throw new InputValueException(sc.Value.String,
+                                                  "Expected the severity number {0}",
+                                                  previousNumber2 + 1);
+                previousNumber2 = (int)wn.Value.Actual;
+
+                ReadValue(pm1, currentLine);
+                wet.ProbabilityMoisture1 = pm1.Value;
+
+                ReadValue(pm2, currentLine);
+                wet.ProbabilityMoisture2 = pm2.Value;
+
+                ReadValue(pm3, currentLine);
+                wet.ProbabilityMoisture3 = pm3.Value;
+                parameters.MoistureClassProbabilities.Add(wet);
+
+                CheckNoDataAfter("the " + pm3.Name + " column",
+                                 currentLine);
+                GetNextLine();
+            }
+            if (parameters.MoistureClassProbabilities.Count == 0)
+                throw NewParseException("No moisture probabilities defined.");
+            if (previousNumber2 != 3)
+                throw NewParseException("Expected shade class {0}", previousNumber2 + 1);
 
             //-------------------------
             //  Read Species Parameters table

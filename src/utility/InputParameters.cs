@@ -42,6 +42,7 @@ namespace Landis.Extension.Succession.NECN
         private string initialDeadSoilMapName;
         // private string initialProbEstablishAdjustmentMapName; // W.Hotta (2022.05.03)
         private string slopeAngleMapName; // W.Hotta (2022.05.07)
+        private string soilMoistureMapName; // W.Hotta (2022.05.07)
 
         private bool calibrateMode;
         private bool reduceOutputs; // W.Hotta (2022.06.12, for calibration)
@@ -95,6 +96,7 @@ namespace Landis.Extension.Succession.NECN
         private Landis.Library.Parameters.Species.AuxParm<int> moistureTolerance; // W.Hotta (2022.08.10)
 
         private List<ISufficientLight> sufficientLight;
+        private List<IWetness> wetness; // W.Hotta (2022.08.10)
         private Landis.Library.Parameters.Species.AuxParm<bool> nlog_depend;
         private double grassThresholdMultiplier; // W.Hotta 2020.07.07
         public double GrassThresholdMultiplier { get { return grassThresholdMultiplier; } }
@@ -547,6 +549,20 @@ namespace Landis.Extension.Succession.NECN
             }
         }
         //---------------------------------------------------------------------
+
+        public List<IWetness> MoistureClassProbabilities
+        {
+            get
+            {
+                return wetness;
+            }
+            set
+            {
+                Debug.Assert(wetness.Count != 0);
+                wetness = value;
+            }
+        }
+        //---------------------------------------------------------------------
         public double Latitude
         {
             get {
@@ -934,6 +950,22 @@ namespace Landis.Extension.Succession.NECN
             }
         }
         //---------------------------------------------------------------------
+        // W.Hotta (2022.08.14) 
+        public string SoilMoistureMapName
+        {
+            get
+            {
+                return soilMoistureMapName;
+            }
+            set
+            {
+                string path = value;
+                if (path.Trim(null).Length == 0)
+                    throw new InputValueException(path, "\"{0}\" is not a valid path.", path);
+                soilMoistureMapName = value;
+            }
+        }
+        //---------------------------------------------------------------------
         public void SetMaximumShadeLAI(byte                   shadeClass,
                                           //IEcoregion             ecoregion,
                                           InputValue<double> newValue)
@@ -1292,6 +1324,7 @@ namespace Landis.Extension.Succession.NECN
 
             maximumShadeLAI = new double[6];
             sufficientLight         = new List<ISufficientLight>();
+            wetness = new List<IWetness>(); // W.Hotta (2022.08.10)
 
         }
 

@@ -37,6 +37,7 @@ namespace Landis.Extension.Succession.NECN
         string InitialDeadSoilMapName { get; set; }
         // string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
         string SlopeAngleMapName { get; set; } // W.Hotta (2022.05.03)
+        string SoilMoistureMapName { get; set; } // W.Hotta (2022.08.14)
         bool CalibrateMode { get; set; }
         bool ReduceOutputs { get; set; } // W.Hotta (2022.06.12, for calibration)
         WaterType WType {get;set;}
@@ -83,6 +84,12 @@ namespace Landis.Extension.Succession.NECN
         /// Definitions of sufficient light probabilities.
         /// </summary>
         List<ISufficientLight> LightClassProbabilities
+        {
+            get;
+        }
+
+        // W.Hotta (2022.08.10)
+        List<IWetness> MoistureClassProbabilities
         {
             get;
         }

@@ -25,6 +25,7 @@ namespace Landis.Extension.Succession.NECN
         private static double[,] avgEndGDD = new double[PlugIn.ModelCore.Species.Count, PlugIn.ModelCore.Ecoregions.Count];
 
 
+
         public static double Calculate(ISpecies species, ActiveSite site)
         {
             IEcoregion climateRegion = PlugIn.ModelCore.Ecoregion[site];
@@ -32,7 +33,7 @@ namespace Landis.Extension.Succession.NECN
             double tempMultiplier = 0.0;
             double soilMultiplier = 0.0;
             double minJanTempMultiplier = 0.0;
-            // double moisture_tolerance = SpeciesData.MoistureTolerance[species]; // W.Hotta (2022.08.10)
+            double wetnessMultiplier = 0.0; // W.Hotta (2022.08.10)
             double establishProbability = 0.0;
 
             AnnualClimate_Monthly ecoClimate = ClimateRegionData.AnnualWeather[climateRegion];
@@ -44,10 +45,12 @@ namespace Landis.Extension.Succession.NECN
             soilMultiplier = SoilMoistureMultiplier(ecoClimate, species, ecoDryDays);
             tempMultiplier = BotkinDegreeDayMultiplier(ecoClimate, species);
             minJanTempMultiplier = MinJanuaryTempModifier(ecoClimate, species);
+            wetnessMultiplier = WetnessProbabilityFinder(species, site); // W.Hotta (2022.08.10)
 
             // Liebig's Law of the Minimum is applied to the four multipliers for each year:
             double minMultiplier = System.Math.Min(tempMultiplier, soilMultiplier);
             minMultiplier = System.Math.Min(minJanTempMultiplier, minMultiplier);
+            minMultiplier = System.Math.Min(wetnessMultiplier, minMultiplier);
 
             establishProbability += minMultiplier;
             // establishProbability *= PlugIn.ProbEstablishAdjust;
@@ -225,8 +228,32 @@ namespace Landis.Extension.Succession.NECN
             else
                 return 1.0;
         }
-        
-       
-        
+
+        // W.Hotta (2022.08.10) ------
+        private static double WetnessProbabilityFinder(ISpecies species, ActiveSite site)
+        {
+            double moisture_tolerance = SpeciesData.MoistureTolerance[species];
+            //PlugIn.ModelCore.UI.WriteLine("  Calculating Sufficient Light from Succession.");
+            double siteWetness = SiteVars.SoilMoisture[site];
+            System.Console.WriteLine("{0}, {1}", "Site wetness", siteWetness);
+            double moistureProbability = 0.0;
+
+            foreach (IWetness wet in PlugIn.wetness)
+            {
+
+                //PlugIn.ModelCore.UI.WriteLine("Sufficient Light:  ShadeClass={0}, Prob0={1}.", lights.ShadeClass, lights.ProbabilityLight0);
+                if (wet.MoistureClass == moisture_tolerance)
+                {
+                    if (siteWetness == 1) moistureProbability = wet.ProbabilityMoisture1;
+                    if (siteWetness == 2) moistureProbability = wet.ProbabilityMoisture2;
+                    if (siteWetness == 3) moistureProbability = wet.ProbabilityMoisture3;
+                }
+            }
+            System.Console.WriteLine("{0}, {1}, {2}, {3}", "Moisture Prob", moistureProbability, species, site);
+            return moistureProbability;
+        }
+        // ----------
+
+
     }
 }

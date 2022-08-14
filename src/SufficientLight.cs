@@ -130,4 +130,102 @@ namespace Landis.Extension.Succession.NECN
         }
 
     }
+
+    // W.Hotta (2022.08.10) ----
+    public interface IWetness
+    {
+
+        double MoistureClass { get; set; }
+        double ProbabilityMoisture1 { get; set; }
+        double ProbabilityMoisture2 { get; set; }
+        double ProbabilityMoisture3 { get; set; }
+
+    }
+
+    /// <summary>
+    /// Definition of the probability of germination under different light levels for 5 shade classes.
+    /// </summary>
+    public class Wetness
+        : IWetness
+    {
+        private double moistureClass;
+        private double probabilityMoisture1;
+        private double probabilityMoisture2;
+        private double probabilityMoisture3;
+
+        //---------------------------------------------------------------------
+
+        public Wetness()
+        {
+        }
+
+        //---------------------------------------------------------------------
+
+        /// <summary>
+        /// The shade class (between 1 and 5).
+        /// </summary>
+        public double MoistureClass
+        {
+            get
+            {
+                return moistureClass;
+            }
+            set
+            {
+                if (value > 3 || value < 1)
+                    throw new InputValueException(value.ToString(),
+                                                  "Value must be between 1 and 3.");
+                moistureClass = value;
+            }
+        }
+
+        //---------------------------------------------------------------------
+        public double ProbabilityMoisture1
+        {
+            get
+            {
+                return probabilityMoisture1;
+            }
+            set
+            {
+                if (value < 0.0 || value > 1.0)
+                    throw new InputValueException(value.ToString(),
+                                          "Value must be between 0 and 1");
+                probabilityMoisture1 = value;
+            }
+        }
+        //---------------------------------------------------------------------
+        public double ProbabilityMoisture2
+        {
+            get
+            {
+                return probabilityMoisture2;
+            }
+            set
+            {
+                if (value < 0.0 || value > 1.0)
+                    throw new InputValueException(value.ToString(),
+                                          "Value must be between 0 and 1");
+                probabilityMoisture2 = value;
+            }
+        }
+        //---------------------------------------------------------------------
+        public double ProbabilityMoisture3
+        {
+            get
+            {
+                return probabilityMoisture3;
+            }
+            set
+            {
+                if (value < 0.0 || value > 1.0)
+                    throw new InputValueException(value.ToString(),
+                                          "Value must be between 0 and 1");
+                probabilityMoisture3 = value;
+            }
+        }
+        //---------------------------------------------------------------------
+
+
+    }
 }
