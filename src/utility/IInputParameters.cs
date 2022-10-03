@@ -35,7 +35,7 @@ namespace Landis.Extension.Succession.NECN
         string InitialSOM3NMapName { get; set; }
         string InitialDeadSurfaceMapName { get; set; }
         string InitialDeadSoilMapName { get; set; }
-        // string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
+        string InitialProbEstablishAdjustmentMapName { get; set; } // W.Hotta (2022.05.03)
         string SlopeAngleMapName { get; set; } // W.Hotta (2022.05.03)
         string SoilMoistureMapName { get; set; } // W.Hotta (2022.08.14)
         bool CalibrateMode { get; set; }

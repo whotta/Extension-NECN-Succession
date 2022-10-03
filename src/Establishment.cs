@@ -79,17 +79,20 @@ namespace Landis.Extension.Succession.NECN
             {
                 if (PlugIn.AngleEstablishAdjustFunction == 1) 
                 {
-                    double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 - SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0);
+                    // double probabilityEstablishmentAdjustment = Math.Max(PlugIn.BaseProbEstablishAdjust * (1 - SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle), 0); // In case of the universal ProbEstAdjust
+                    double probabilityEstablishmentAdjustment = Math.Max(SiteVars.ProbEstAdjust[site] * (1 - (SiteVars.SlopeAngle[site] / PlugIn.EstablishThresholdAngle)), 0); // In case that values of ProbEstAdjust are spatially different. 
                     establishProbability *= probabilityEstablishmentAdjustment;
                 }
                 else if (PlugIn.AngleEstablishAdjustFunction == 2)
                 {
-                    double probabilityEstablishmentAdjustment = Math.Max(Math.Pow((SiteVars.SlopeAngle[site] - PlugIn.EstablishThresholdAngle),2) / (Math.Pow(PlugIn.EstablishThresholdAngle, 2) / PlugIn.BaseProbEstablishAdjust), 0);
+                    // double probabilityEstablishmentAdjustment = Math.Max(Math.Pow((SiteVars.SlopeAngle[site] - PlugIn.EstablishThresholdAngle),2) / (Math.Pow(PlugIn.EstablishThresholdAngle, 2) / PlugIn.BaseProbEstablishAdjust), 0); // In case of the universal ProbEstAdjust
+                    double probabilityEstablishmentAdjustment = Math.Max(Math.Pow((SiteVars.SlopeAngle[site] - PlugIn.EstablishThresholdAngle), 2) / (Math.Pow(PlugIn.EstablishThresholdAngle, 2) / SiteVars.ProbEstAdjust[site]), 0); // In case that values of ProbEstAdjust are spatially different. 
                     establishProbability *= probabilityEstablishmentAdjustment;
                 }
                 else if (PlugIn.AngleEstablishAdjustFunction == 3)
                 {
-                    double probabilityEstablishmentAdjustment = Math.Max((PlugIn.BaseProbEstablishAdjust - (PlugIn.BaseProbEstablishAdjust / Math.Pow(PlugIn.EstablishThresholdAngle, 2)) * Math.Pow(SiteVars.SlopeAngle[site], 2)), 0);
+                    // double probabilityEstablishmentAdjustment = Math.Max((PlugIn.BaseProbEstablishAdjust - (PlugIn.BaseProbEstablishAdjust / Math.Pow(PlugIn.EstablishThresholdAngle, 2)) * Math.Pow(SiteVars.SlopeAngle[site], 2)), 0); // In case of the universal ProbEstAdjust
+                    double probabilityEstablishmentAdjustment = Math.Max((SiteVars.ProbEstAdjust[site] - (SiteVars.ProbEstAdjust[site] / Math.Pow(PlugIn.EstablishThresholdAngle, 2)) * Math.Pow(SiteVars.SlopeAngle[site], 2)), 0); // In case that values of ProbEstAdjust are spatially different. 
                     establishProbability *= probabilityEstablishmentAdjustment;
                 }
             }
