@@ -235,7 +235,7 @@ namespace Landis.Extension.Succession.NECN
             double moisture_tolerance = SpeciesData.MoistureTolerance[species];
             //PlugIn.ModelCore.UI.WriteLine("  Calculating Sufficient Light from Succession.");
             double siteWetness = SiteVars.SoilMoisture[site];
-            System.Console.WriteLine("{0}, {1}", "Site wetness", siteWetness);
+            //System.Console.WriteLine("{0}, {1}", "Site wetness", siteWetness);
             double moistureProbability = 0.0;
 
             foreach (IWetness wet in PlugIn.wetness)
@@ -249,7 +249,7 @@ namespace Landis.Extension.Succession.NECN
                     if (siteWetness == 3) moistureProbability = wet.ProbabilityMoisture3;
                 }
             }
-            System.Console.WriteLine("{0}, {1}, {2}, {3}", "Moisture Prob", moistureProbability, species, site);
+            //System.Console.WriteLine("{0}, {1}, {2}, {3}", "Moisture Prob", moistureProbability, species, site);
             return moistureProbability;
         }
         // ----------
