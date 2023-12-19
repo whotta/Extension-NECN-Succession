@@ -68,7 +68,7 @@ namespace Landis.Extension.Succession.NECN
             ReadLandisDataVar();
 
             int numLitterTypes = 4;
-            int numFunctionalTypes = 25;
+            int numFunctionalTypes = 49; // W.Hotta (2023.12.19): default = 25
 
             InputParameters parameters = new InputParameters(speciesDataset, numLitterTypes, numFunctionalTypes);
 
