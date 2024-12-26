@@ -343,8 +343,8 @@ namespace Landis.Extension.Succession.NECN
             }
             set
             {
-                if (value < 0.0 || value > 3.0)
-                    throw new InputValueException(value.ToString(), "AngleEstablishAdjustFunc must be > 0.0 and < 3.0");
+                if (value <= 0.0)
+                    throw new InputValueException(value.ToString(), "AngleEstablishAdjustFunc must be >= 0.0");
                 angleEstablishAdjustFunction = value;
             }
         }
